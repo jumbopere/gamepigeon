@@ -1,8 +1,6 @@
-
-import { Inter } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Navbar, Footer } from "./components";
 
 export const metadata = {
   title: "PJ Anagrams Solver",
@@ -14,10 +12,10 @@ export default function RootLayout( {children}) {
   return (
 
     <html lang="en">
-      <body className={inter.className}>
-   
+      <body className="flex flex-col min-h-screen bg-gray-100" >
+   <Navbar/>
         {children}
-      
+   <Footer/>
         </body>
     </html>
 

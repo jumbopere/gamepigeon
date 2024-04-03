@@ -19,12 +19,10 @@ const filterWords = (inputLetters, maxLength) => {
 
 export const POST = async (req, res) => {
   const { inputLetters } = await req.json();
-  if (!inputLetters || inputLetters.length !== 6) {
-    return Response.json({status:400},{ error: 'Please provide 6 letters' });
-  }
-
-  const maxLength = Math.min(6, inputLetters.length);
-  const validWords = filterWords(inputLetters, maxLength);
+ 
+const newInputLetters= inputLetters.toLowerCase().trim()
+  const maxLength = Math.min(6, newInputLetters.length);
+  const validWords = filterWords(newInputLetters, maxLength);
 
   const wordGroups = {};
   for (let word of validWords) {
@@ -35,5 +33,5 @@ export const POST = async (req, res) => {
     wordGroups[length].push(word);
   }
 
-  return Response.json([wordGroups['3'],wordGroups['4'], wordGroups['5'], wordGroups['6']]);
+  return Response.json(Object.values(wordGroups));
 };

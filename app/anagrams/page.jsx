@@ -3,34 +3,22 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-
-export default function Home() {
+const Anagrams = () => {
   const [inputLetters, setInputLetters] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [words, setWords] = useState({});
-
-
 
   useEffect(() => {
     const fetchWords = async () => {
       try {
         if (inputLetters && inputLetters.length === 6) {
-    //       const response = await axios.post("http://localhost:3100/generate-words",{inputLetters});
-    //  console.log(response)
-    //       setWords(response.data);
-    //       setErrorMessage("");
-   await axios.post("api/anagrams", {inputLetters}).then(response => {
-    console.log(response?.data)
-  //  const {
-  //   threeLetterWords,
-  //   fourLetterWords,
-  //   fiveLetterWords,
-  //   sixLetterWords, unknown} = response.data
-    
-      setWords(response?.data)
-      setErrorMessage("")
-      
-    })
+          await axios
+            .post("api/anagrams", { inputLetters })
+            .then((response) => {
+              console.log(response?.data);
+              setWords(response?.data);
+              setErrorMessage("");
+            });
         } else {
           setWords({});
         }
@@ -44,11 +32,8 @@ export default function Home() {
     fetchWords();
   }, [inputLetters]);
 
-
-  
   return (
-  
-      
+
       <div className="container mx-auto p-4 flex-grow">
         <h1 className="text-xl font-bold mb-4 italic text-center">
           Just type the Anagram Word
@@ -61,12 +46,11 @@ export default function Home() {
             placeholder="Enter the 6 letters"
             className="border border-gray-400 px-3 py-2 mr-2 w-full max-w-xs"
           />
-            {errorMessage && (
-          <p className="text-red-500 text-center">{errorMessage}</p>
-        )}
-       
+          {errorMessage && (
+            <p className="text-red-500 text-center">{errorMessage}</p>
+          )}
         </div>
-      
+
         <div className="flex flex-wrap justify-center">
           {words[5]?.length > 0 && (
             <div className="w-full mb-4 flex flex-wrap justify-center">
@@ -82,7 +66,7 @@ export default function Home() {
               </div>
             </div>
           )}
-             
+
           {words[4]?.length > 0 && (
             <div className="w-full mb-4 flex flex-wrap justify-center">
               <h2 className="w-full text-lg font-bold text-center mb-2">
@@ -127,7 +111,7 @@ export default function Home() {
           )}
         </div>
       </div>
-    
-
+   
   );
-}
+};
+export default Anagrams;
