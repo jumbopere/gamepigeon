@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className=" container mx-auto  flex-grow bg-gray-200 flex justify-center items-center">
       <div className="text-center">
-        <h1 className="text-3xl font-bold mb-8">Welcome to My PJ GamePigeon Word Game Solver</h1>
+        <h1 className="text-3xl font-bold mb-8">Welcome to PJ GamePigeon Word Game Solver</h1>
         <div className="space-x-4">
           <Link
             href="/anagrams"
